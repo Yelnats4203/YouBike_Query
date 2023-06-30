@@ -6,6 +6,48 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <table id="table">
+    </table>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script>
+        
+        
+        var datas = null;
+        var dataHeaders = null;
+        const table = document.getElementById('table');
+        
+        async function load(){
+            await getData();
+            if(datas == null)
+                return;
+            createHeader();
+        }
+        load();
+
+        async function getData(){
+            try{
+                const response = await axios.get('https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json');
+                datas = await response.data;
+                console.log(datas);
+            }catch(error){
+                console.log(error);
+            }            
+        }
+
+        function createHeader(){            
+            dataHeaders = Object.getOwnPropertyNames(datas[0]);
+            console.log(dataHeaders.length)
+            var tableHeader = table.createTHead();
+            var headerRow = tableHeader.insertRow();
+            for(var i =0;i<dataHeaders.length;i++){
+                //var cell = headerRow.insertCell(i);
+                //cell.innerHTML =`<b>${dataHeaders[i]}</b>`;
+                th = document.createElement('th');
+                th.innerHTML = dataHeaders[i];
+                headerRow.appendChild(th);
+            }
+        }
+    </script>
 </body>
 </html>
