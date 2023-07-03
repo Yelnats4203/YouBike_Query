@@ -46,20 +46,20 @@
             let headerRow = tableHeader.insertRow();
             for(let i =0;i<dataHeaders.length;i++){
                 th = document.createElement('th');
-                th.innerHTML = dataHeaders[i];
+                th.innerText = dataHeaders[i];
                 headerRow.appendChild(th);
             }
         }
 
         function createDataBody(){
-            var tableBody = table.createTBody();
+            let tableBody = table.createTBody();
             for(let i = 0; i<100;i++){
                 if(datas[i]==null)
                     return;          
                 let row = tableBody.insertRow();
                 for(let j =0; j<dataHeaders.length;j++){
                     let cell = row.insertCell();
-                    cell.innerHTML = datas[i][dataHeaders[j]];
+                    cell.innerText = datas[i][dataHeaders[j]];
                 }
             }
         }
