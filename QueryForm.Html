@@ -10,6 +10,8 @@
 <body>
     <table id="table" class="table table-dark table-hover">
     </table>
+
+    
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -31,8 +33,8 @@
         async function getData(){
             try{
                 const response = await axios.get('https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json');
-                datas = await response.data;
-                //console.log(datas);
+                datas =  response.data;
+                console.log(datas);
             }catch(error){
                 console.log(error);
             }            
@@ -40,11 +42,9 @@
 
         function createHeader(){            
             dataHeaders = Object.getOwnPropertyNames(datas[0]);
-            var tableHeader = table.createTHead();
-            var headerRow = tableHeader.insertRow();
-            for(var i =0;i<dataHeaders.length;i++){
-                //var cell = headerRow.insertCell(i);
-                //cell.innerHTML =`<b>${dataHeaders[i]}</b>`;  //增加的為td而不是th
+            let tableHeader = table.createTHead();
+            let headerRow = tableHeader.insertRow();
+            for(let i =0;i<dataHeaders.length;i++){
                 th = document.createElement('th');
                 th.innerHTML = dataHeaders[i];
                 headerRow.appendChild(th);
@@ -53,18 +53,12 @@
 
         function createDataBody(){
             var tableBody = table.createTBody();
-            for(var i = 0; i<100;i++){
+            for(let i = 0; i<100;i++){
                 if(datas[i]==null)
                     return;          
-                var row = tableBody.insertRow();
-                //console.log(datas[i]['sno']);
-                // dataHeaders.forEach(header=>{
-                //     var cell = row.insertCell();
-                //     cell.innHTML = datas[i][header];
-                //     console.log(cell.innHTML);
-                // })
-                for(var j =0; j<dataHeaders.length;j++){
-                    var cell = row.insertCell();
+                let row = tableBody.insertRow();
+                for(let j =0; j<dataHeaders.length;j++){
+                    let cell = row.insertCell();
                     cell.innerHTML = datas[i][dataHeaders[j]];
                 }
             }
