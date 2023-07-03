@@ -22,7 +22,7 @@
         const table = document.getElementById('table');
         
         async function load(){
-            await getData();
+            datas = await getData();
             if(datas == null)
                 return;
             createHeader();
@@ -33,8 +33,7 @@
         async function getData(){
             try{
                 const response = await axios.get('https://tcgbusfs.blob.core.windows.net/dotapp/youbike/v2/youbike_immediate.json');
-                datas =  response.data;
-                console.log(datas);
+                return response.data;
             }catch(error){
                 console.log(error);
             }            
